@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiO₂ 광촉매 탐구</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 3Dmol.js -->
+    <script src="https://3dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+</head>
+<body>
+    <div id="slide-container">
+        
+        <!-- 제목 yarr-->
+        <div class="slide active" id="slide-1">
+            <div class="content">
+                <h1 class="title">TiO₂ 광촉매가 메틸렌블루 색 농도 감소에 미치는 영향</h1>
+                <p class="subtitle">탐구 주제</p>
+            </div>
+        </div>
+
+        <!-- 선정이유 -->
+        <div class="slide" id="slide-2">
+            <div class="content relative-container">
+                <h2 id="title-reason" class="anim-title">주제 선정 이유</h2>
+                
+                <div id="box-reason" class="anim-box state0">
+                    <div id="list-item-1" class="reason-item">
+                        <span class="bullet" style="position: absolute; right: 100%; top: 0; padding-right: 0.8rem;">▪</span><span class="highlight">광촉매 반응</span>에 대한 탐구
+                    </div>
+                    <div id="list-item-2" class="reason-item">
+                        <span id="bullet-2" class="bullet" style="position: absolute; right: 100%; top: 0; padding-right: 0.8rem;">▪</span><span id="flying-word">광촉매</span><span style="position: relative; display: inline-block;"><span id="suffix-word">란?</span><span id="fade-word" style="position: absolute; left: 0; top: 0; white-space: nowrap;">의 환경적 활용과 응용</span></span>
+                    </div>
+                    <div id="list-item-3" class="reason-item">
+                        <span class="bullet" style="position: absolute; right: 100%; top: 0; padding-right: 0.8rem;">▪</span>여러 공학 분야의 <span class="highlight">융합</span>
+                    </div>
+                </div>
+
+                <div id="box-photo" class="anim-box hidden flex-row photo-content">
+                    <div class="text-area">
+                        <p><strong>광촉매</strong>는 빛을 받으면 화학 반응을 빠르게 일어나게 돕는 물질이다.</p>
+                        <p>촉매는 반응을 도와주지만, 반응 후에도 스스로는 크게 변하지 않는다.</p>
+                        <p><span class="highlight">TiO₂</span>는 대표적인 광촉매 물질로, 빛을 받으면 주변의 물이나 산소와 반응하여 염료 같은 유기물을 분해하는 데 도움을 줄 수 있다.</p>
+                    </div>
+                    <div class="visual-area">
+                        <div class="flow-chart">
+                            <div class="flow-item">빛</div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-item highlight bold">TiO₂ 입자</div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-item">활성종 생성</div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-item highlight">메틸렌블루 색 감소</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 이론배경(빡셈) -->
+        <div class="slide" id="slide-3">
+            <div class="content theory-stage" id="theory-stage">
+                <h2 id="theory-title">이론 배경</h2>
+
+                <div class="theory-focus" id="theory-focus">TiO₂</div>
+
+                <div class="theory-topic-list" aria-label="이론 배경 순서">
+                    <div class="theory-topic" id="topic-tio2">
+                        <span class="topic-index">1</span>
+                        <span>이산화티타늄</span>
+                    </div>
+                    <div class="theory-topic" id="topic-mb">
+                        <span class="topic-index">2</span>
+                        <span>메틸렌블루</span>
+                    </div>
+                    <div class="theory-topic" id="topic-radical">
+                        <span class="topic-index">3</span>
+                        <span>하이드록실 라디칼</span>
+                    </div>
+                </div>
+
+                <div class="theory-card" id="tio2-card">
+                    <div class="theory-copy">
+                        <h3>TiO₂ (이산화티타늄)</h3>
+                        <p>대표적인 광촉매 물질로, 자외선을 받으면 전자와 정공이 생성된다.</p>
+                        <p>이 전자-정공 쌍이 물과 산소와 반응해 활성종 생성을 돕고, 염료 같은 유기물 분해를 촉진한다.</p>
+                    </div>
+                    <div class="theory-visual molecule-visual" aria-label="TiO2 3D 결정 구조">
+                        <h3>TiO₂ 결정 구조 모식</h3>
+                        <div id="tio2-viewer" class="mol-container"></div>
+                    </div>
+                </div>
+
+                <div class="theory-card" id="mb-card">
+                    <div class="theory-copy">
+                        <h3>메틸렌블루</h3>
+                        <p>청색을 띠는 유기 염료로, 농도 변화가 색 변화로 드러나 광촉매 반응 관찰에 적합하다.</p>
+                        <p>분해가 진행될수록 용액의 푸른색이 옅어져 색 센서로 변화를 추적할 수 있다.</p>
+                    </div>
+                    <div class="theory-visual molecule-visual">
+                        <h3>메틸렌블루 분자 구조</h3>
+                        <div id="mol-viewer" class="mol-container"></div>
+                    </div>
+                </div>
+
+                <div class="theory-card" id="radical-card">
+                    <div class="theory-copy">
+                        <h3>하이드록실 라디칼 (·OH)</h3>
+                        <p>광촉매 반응 과정에서 생기는 매우 반응성이 큰 활성종이다.</p>
+                        <p>유기 염료의 결합을 공격해 작은 물질로 분해되도록 돕는 핵심 분해 인자이다.</p>
+                    </div>
+                    <div class="theory-visual molecule-visual" aria-label="하이드록실 라디칼 3D 구조">
+                        <h3>하이드록실 라디칼 구조</h3>
+                        <div id="radical-viewer" class="mol-container"></div>
+                    </div>
+                </div>
+
+                <div class="theory-final flex-row" id="theory-final">
+                    <div class="text-area">
+                        <h2>이론 배경</h2>
+                        <ul class="clean-list">
+                            <li><strong>TiO₂ (이산화티타늄)</strong>: 자외선을 받으면 전자가 들떠 전자-정공 쌍을 생성하는 대표적 광촉매</li>
+                            <li><strong>메틸렌블루</strong>: 산화-환원 반응을 시각적으로 확인하기 좋은 유기 염료</li>
+                            <li><strong>하이드록실 라디칼 (·OH)</strong>: 광촉매 반응으로 생성되어 유기물을 강력하게 분해하는 물질</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 탐구가설 -->
+        <div class="slide" id="slide-4">
+            <div class="content relative-container">
+                <h2 id="title-hypo" class="anim-title">탐구 가설</h2>
+                <h2 id="title-setup" class="anim-title hidden">실험 설계</h2>
+                <h2 id="title-measure" class="anim-title hidden">측정 방법</h2>
+                <h2 id="title-summary" class="anim-title hidden">탐구 설계 요약</h2>
+
+                <div id="box-hypo" class="hypothesis-box anim-box state0">
+                    <div class="hypothesis-line">
+                        <strong>가설:</strong> <span class="highlight">빛 + TiO₂</span> 조건에서 메틸렌블루의 푸른색이 가장 빠르게 옅어질 것이다.
+                    </div>
+                    <p class="hypothesis-detail">
+                        TiO₂가 빛을 받으면 전자와 정공이 생성되고, 이들이 물과 산소와 반응해 하이드록실 라디칼 같은 활성종을 만든다.
+                        따라서 빛과 TiO₂가 함께 있는 조건에서 메틸렌블루 분해가 가장 빠르게 진행될 것으로 예상했다.
+                    </p>
+                    <div class="compact-title">가설</div>
+                    <p class="summary-line">빛과 TiO₂가 함께 있을 때 색 농도 감소가 가장 클 것이다.</p>
+                    <p class="summary-hypothesis">
+                        <span class="highlight">빛 + TiO₂</span> 조건에서 메틸렌블루 분해가 가장 빠르다고 예상
+                    </p>
+                </div>
+                
+                <div id="box-setup" class="box anim-box hidden">
+                    <div class="compact-title">실험 설계</div>
+                    <p class="summary-line">빛과 TiO₂의 유무를 나누어 네 조건을 비교한다.</p>
+                    <div class="setup-grid">
+                        <div class="table-wrap">
+                            <table class="clean-table">
+                                <thead>
+                                    <tr>
+                                        <th>실험군</th>
+                                        <th>조건</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>A</strong></td><td>메틸렌블루 + <span class="highlight">TiO₂</span> + <span class="highlight">빛</span></td></tr>
+                                    <tr><td><strong>B</strong></td><td>메틸렌블루 + <span class="highlight">빛</span></td></tr>
+                                    <tr><td><strong>C</strong></td><td>메틸렌블루 + <span class="highlight">TiO₂</span> + 어두움</td></tr>
+                                    <tr><td><strong>D</strong></td><td>메틸렌블루만</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-wrap meaning-table-wrap">
+                            <table class="clean-table">
+                                <thead>
+                                    <tr>
+                                        <th>비교</th>
+                                        <th>확인 내용</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>A-B</td><td>TiO₂가 있을 때 빛 반응이 더 빨라지는지</td></tr>
+                                    <tr><td>A-C</td><td>빛이 있어야 광촉매 반응이 일어나는지</td></tr>
+                                    <tr><td>D</td><td>메틸렌블루 자연 변화 기준</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="summary-groups" aria-label="실험군 요약">
+                        <strong>비교군</strong>
+                        <span>A</span><span>B</span><span>C</span><span>D</span>
+                    </div>
+                </div>
+
+                <div id="box-measure" class="box anim-box hidden">
+                    <div class="compact-title">측정 방법</div>
+                    <p class="summary-line">색 센서의 B/Clear 비율로 푸른색 농도 변화를 추적한다.</p>
+                    <div class="measure-grid">
+                        <div class="measure-copy">
+                            <ul class="clean-list">
+                                <li><strong>도구</strong>: TCS34725 색 센서</li>
+                                <li><strong>측정값</strong>: Red, Green, Blue, Clear 채널</li>
+                                <li><strong>판단 기준</strong>: 메틸렌블루의 푸른색 변화를 보기 위해 <span class="highlight">B/Clear 비율</span> 사용</li>
+                            </ul>
+                            <p class="channel-note">
+                                메틸렌블루 용액은 푸른색이 강할수록 B 값의 비중이 커진다. Clear 채널은 전체 빛의 양을 함께 잡아 주므로,
+                                B/Clear 비율로 조명 차이를 줄이고 색 농도 변화를 비교했다.
+                            </p>
+                        </div>
+                        <figure class="sensor-figure">
+                            <div class="sensor-board" aria-label="TCS34725 색 센서 모식도">
+                                <div class="sensor-label">TCS34725</div>
+                                <div class="sensor-chip">
+                                    <div class="sensor-window"></div>
+                                </div>
+                                <div class="sensor-pins">
+                                    <span>VIN</span>
+                                    <span>SDA</span>
+                                    <span>SCL</span>
+                                    <span>GND</span>
+                                </div>
+                            </div>
+                            <figcaption>색 채널 변화 측정</figcaption>
+                        </figure>
+                    </div>
+                    <div class="summary-measure-points">
+                        <p><strong>센서</strong>: TCS34725</p>
+                        <p><strong>지표</strong>: B/Clear 비율</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 -->
+        <div class="slide" id="slide-5">
+            <div class="content flex-row">
+                <div class="text-area">
+                    <h2>실험 결과</h2>
+                    <div class="table-wrap">
+                        <table class="clean-table small-text">
+                            <thead>
+                                <tr>
+                                    <th>시간</th>
+                                    <th>A (빛+TiO₂)</th>
+                                    <th>B (빛)</th>
+                                    <th>C (어둠+TiO₂)</th>
+                                    <th>D (대조군)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="result-row"><td>0분</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+                                <tr class="result-row"><td>10분</td><td>86%</td><td>98%</td><td>94%</td><td>100%</td></tr>
+                                <tr class="result-row"><td>20분</td><td>73%</td><td>96%</td><td>91%</td><td>99%</td></tr>
+                                <tr class="result-row"><td>30분</td><td>61%</td><td>94%</td><td>90%</td><td>99%</td></tr>
+                                <tr class="result-row"><td>40분</td><td>51%</td><td>92%</td><td>89%</td><td>98%</td></tr>
+                                <tr class="result-row"><td>50분</td><td>43%</td><td>90%</td><td>88%</td><td>98%</td></tr>
+                                <tr class="result-row"><td>60분</td><td>36%</td><td>88%</td><td>88%</td><td>98%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="visual-area">
+                    <div class="chart-container">
+                        <canvas id="resultChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 한계 결론 -->
+        <div class="slide" id="slide-6">
+            <div class="content">
+                <h2>한계와 결론</h2>
+                <div class="conclusion-grid">
+                    <div class="card">
+                        <div class="card-icon">!</div>
+                        <h3>한계점</h3>
+                        <p>실제 분해물을 직접 확인하기는 어려움</p>
+                        <p>색 변화를 통한 <span class="highlight">간접적 확인</span>에 그침</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">✓</div>
+                        <h3>결론</h3>
+                        <p>가설대로 <span class="highlight">빛 + TiO₂</span> 조건에서 가장 빠른 색 농도 감소(분해) 확인</p>
+                        <p>광촉매의 실제적 물 정화 가능성 입증</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 네비게이션 오버레이 -->
+    <div class="nav-controls">
+        <button id="prev-btn">◀ 이전</button>
+        <span id="page-indicator">1 / 15</span>
+        <button id="next-btn">다음 ▶</button>
+    </div>
+
+    <script src="main.js?v=mol-fix-6"></script>
+</body>
+</html>
